@@ -10,9 +10,21 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use sisVentas\Categoria;
+use sisVentas\User;
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $users = User::all();
+
+    return view('welcome',compact('users'));
+
+});
+
+Route::get('api/user', function () {
+
+    return Datatables::eloquent(User::query())->make(true);
+
 });
 
 Route::resource('almacen/categoria','CategoriaController');
